@@ -1,0 +1,27 @@
+<div class="row center">
+  <div class="mb-4">
+    <% if !@album.images.any? %>
+      <div class="alert alert-warning" role="alert">
+        No Album pictures found!!!
+      </div>
+    <% else %>
+      <div class="alert alert-success" role="alert">
+        Description : <%=@album.description%>
+      </div>
+    <% end %>
+  </div>
+  <% @album.images.each do |item| %>
+    <div class="col-sm-6 col-md-4 col-lg-4 col-xl-3 center">
+      <div class="card text-end show-card m-1">
+        <% if user_signed_in? %>
+          <div class="card-header">
+            <%= link_to '<button class="btn-close"></button>'.html_safe, delete_image_album_path(item.id), data: {turbo_method: :delete,turbo_confirm: "are you sure"} %>
+          </div>
+        <% end %>
+        <div class="card-body">
+          <%= image_tag item,class: "showimg"%>
+        </div>
+      </div>          
+    </div>
+  <% end %>
+</div>

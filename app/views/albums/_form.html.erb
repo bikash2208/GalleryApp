@@ -1,0 +1,47 @@
+<%= form_with model: @album do |form|%>
+
+  <%= form.label :title,class:"mb-0" %>
+  <%= form.text_field :title,class:"form-control mt-0" %>
+  <ul class="mb-3">
+    <% @album.errors.full_messages_for(:title).each do |message| %>
+      <li class="text-danger"><%= message %></li>
+    <% end %>
+  </ul>
+
+  <%= form.label :description %>
+  <%= form.text_area :description,class:"form-control " %>
+  <ul class="mb-3">
+    <% @album.errors.full_messages_for(:description).each do |message| %>
+      <li class="text-danger"><%= message %></li>
+    <% end %>
+  </ul>
+  
+  <%= form.label "Album tags (with separated by comma)" %>
+  <%= form.text_field :album_tags,class:"form-control " %>
+  <ul class="mb-3">
+    <% @album.errors.full_messages_for(:album_tags).each do |message| %>
+      <li class="text-danger"><%= message %></li>
+    <% end %>
+  </ul>
+  
+  <%= form.label :album_pic %>
+  <%= form.file_field :album_pic,class:"form-control " %>
+  <ul class="mb-3">
+    <% @album.errors.full_messages_for(:album_pic).each do |message| %>
+      <li class="text-danger"><%= message %></li>
+    <% end %>
+  </ul>
+  
+  <%= form.label :images %>
+  <%= form.file_field :images, multiple: true,class:"form-control "%>
+  <ul class="mb-3">
+    <% @album.errors.full_messages_for(:images).each do |message| %>
+      <li class="text-danger"><%= message %></li>
+    <% end %>
+  </ul>
+  
+  <%= form.check_box :publish,class:"form-check-input" %>
+  <%= form.label :publish,class:"form-check-label mb-3" %>
+  
+  <%= form.submit $albumbtn,class: "btn btn-success"%>
+<% end %>

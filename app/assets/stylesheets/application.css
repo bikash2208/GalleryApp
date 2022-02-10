@@ -1,0 +1,99 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+*{
+  margin: 0;
+  padding: 0;
+  transition: 0.5s;
+}
+
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img{
+  width: 270px;
+  height: 250px;
+  border-radius: 15px;
+}
+.img:hover, .showimg:hover{
+  transition: 00.5s;
+  transform: scale(1.1);
+}
+
+.btn{
+  width: 100%; 
+  text-decoration: none;
+}
+
+.cardtext{
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.index-card {
+  margin: 20px 10px;
+  border-radius: 4px;
+  width: 380px !important;
+  justify-content: center;
+  text-align: center;
+  min-height: 400px;
+  box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em,rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+}
+
+.index-search{
+  height: 200px;
+  width: 100%;
+}
+
+.sheredLink{
+  color: #198754;
+  text-decoration: none;
+}
+
+.sheredLink:hover{
+  color: #125737;
+  text-decoration: underline;
+}
+
+.cardWidth{
+  width: 100%;
+  max-width: 600px;
+}
+
+.show-card{
+  width: 260px !important;
+  margin: 5px;
+}
+
+.showimg{
+  width: 100%;
+  max-width: 250px !important;
+  height: 235px !important;
+  border-radius: 5px;
+}
+
+.footer{
+  position:fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  background-color: rgb(218, 218, 218);
+}
