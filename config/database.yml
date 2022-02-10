@@ -21,7 +21,6 @@ test:
   database: db/test.sqlite3
 
 production:
-   adapter: postgres
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+  <<: *default
+  adapter: postgres
   database: db/production.postgres
