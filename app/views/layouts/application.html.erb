@@ -28,18 +28,7 @@
               <li class="nav-item"><%=link_to "Draft",albums_draft_path,class:"nav-link "+$draft.to_s+" m-1 fs-4"%></li>
               <li class="nav-item"><%=link_to "AddNewAlbum",new_album_path,class:"nav-link "+$addnew.to_s+" m-1 fs-4"%></li>
               <li class="nav-item"><%=link_to "SignOut",destroy_user_session_path,class: "nav-link m-1 fs-4",
-              data: {turbo_method: :delete, turbo_confirm: "Are you sure!!!"}
-              %></li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Dropdown link
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </li>
+              data: {turbo_method: :delete, turbo_confirm: "Are you sure!!!"}%></li>
             <% else %>
               <li class="nav-item"><%=link_to "SignIn",new_user_session_path,class: "nav-link m-1 fs-4"%></li>
               <li class="nav-item"><%=link_to "SignUp",new_user_registration_path,class: "nav-link m-1 fs-4"%></li>
