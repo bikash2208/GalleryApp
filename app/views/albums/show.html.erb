@@ -5,23 +5,56 @@
         No Album pictures found!!!
       </div>
     <% else %>
-      <div class="alert alert-success" role="alert">
-        Description : <%=@album.description%>
+      <div class="alert alert-success row" role="alert">
+        <span class=" col-auto w-50">Description : <%=@album.description%></span>
+        <span class="text-end col-auto w-50">Total : <%=@album.images.count%> pictures</span>
       </div>
     <% end %>
+      <div class="center row">
+        <%=link_to "Back",root_path,class:"btn btn-primary w-25"%>
+        <p class="w-50"></p> 
+        <button class="btn btn-success w-25 addimg">
+          <%= form_with model: @album do |form|%>
+            Add images
+            <%= form.file_field :images, multiple: true,class:"inputimg"%>
+          <% end %>
+        </button>
+      </div>
   </div>
-  <% @album.images.each do |item| %>
-    <div class="col-sm-6 col-md-4 col-lg-4 col-xl-3 center">
-      <div class="card text-end show-card m-1">
+  <div class="row justify-content-center g-4 m-1">
+    <% @album.images.each do |item| %>
+      <div class="col-md-6 col-lg-4 position-relative showcard">
+        <a href=<%=Rails.application.routes.url_helpers.rails_blob_path(item, only_path: true)%> data-fancybox>
+          <img class="showimg" src=<%=Rails.application.routes.url_helpers.rails_blob_path(item, only_path: true)%> />
+        </a>          
         <% if user_signed_in? %>
-          <div class="card-header">
-            <%= link_to '<button class="btn-close"></button>'.html_safe, delete_image_album_path(item.id), data: {turbo_method: :delete,turbo_confirm: "are you sure"} %>
-          </div>
+          <%= link_to '<i class="closeIcon bi bi-x-square-fill"></i>'.html_safe, delete_image_album_path(item.id), data: {turbo_method: :delete} %>
         <% end %>
-        <div class="card-body">
-          <%= image_tag item,class: "showimg"%>
-        </div>
-      </div>          
-    </div>
-  <% end %>
+      </div>
+    <% end %>
+  <div>
 </div>
+
+<script>
+  // const collection = document.getElementsByClassName("inputimg");
+  $(document).ready(function() {
+    $('.inputimg').change(function(e) {
+      var arrimg = e.target.files;  
+      var valid=false;
+      for (let index = 0; index < arrimg.length; index++) {
+        var element = arrimg[index].name.split('.').pop().toLowerCase();
+        if($.inArray(element,['jpg', 'jpeg', 'png']) == -1){
+          console.log(element);
+          valid=true;
+          break;
+        }
+      }
+      if (arrimg.length > 0 && valid==false) {
+        $(this).parent('form').submit();   
+      }else if(valid==true){
+        valid=false;
+        alert("file should be in jpg, jpeg and png formats");
+      }
+    });
+  });
+</script>

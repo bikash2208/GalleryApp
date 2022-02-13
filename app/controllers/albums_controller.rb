@@ -1,5 +1,5 @@
 class AlbumsController < ApplicationController
-  before_action :authenticate_user!, :except => [:home, :show]
+  before_action :authenticate_user!, :except => [:home, :show, :search]
   before_action :find_album, only: [:edit, :update, :show, :destroy]
   before_action :find_albums
   before_action :activeconf, only: [:home, :new, :draft]

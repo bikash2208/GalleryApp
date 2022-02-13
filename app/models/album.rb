@@ -5,20 +5,20 @@ class Album < ApplicationRecord
   has_many :taggings,dependent: :destroy
   has_many :tags, through: :taggings, dependent: :destroy
 
-  validates :title, presence: true
-  validates :description, presence: true
-  validates :album_tags, presence: true
+  validates :title, presence: true, length: { minimum: 3}
+  validates :description, presence: true, length: {minimum: 10,message: "Description greater then 10 charracters"}
+  validates :album_tags, presence: true,length: {minimum: 3}
   validates :album_pic,attached: true, content_type: [:png, :jpg, :jpeg]
   validates :images,content_type: [:png, :jpg, :jpeg]
 
   def album_tags=(names)
     self.tags= names.split(",").map do |name|
-      Tag.where(name: name.strip).first_or_create!
+      Tag.where(name: name.strip.downcase).first_or_create!
     end
   end
 
   def album_tags
-    self.tags.map(&:name).join(",")
+    self.tags.map(&:name).join(", ")
   end
 end
  

@@ -1,5 +1,4 @@
 <div class="index-search center">
-  
     <%= form_with url: albums_search_path, method: :get do |form|%>
       <div class="input-group mb-3">
         <%= form.text_field :query,value: $tags,placeholder: "Search tags...",class: "form-control", :required => true %>
@@ -17,7 +16,9 @@
           <h3><%=item.title%></h3>
         </div>
         <div class="m-3">
-          <a href="<%=album_url(item)%>"><%= image_tag item.album_pic, class:"img"%></a>
+          <a href=<%=Rails.application.routes.url_helpers.rails_blob_path(item.album_pic, only_path: true)%> data-fancybox>
+            <img class="img" src=<%=Rails.application.routes.url_helpers.rails_blob_path(item.album_pic, only_path: true)%> />
+          </a>
         </div>
         <div class="pb-3">
           <span class="cardtext">Published-by : </span><%= item.user.name%><br>
