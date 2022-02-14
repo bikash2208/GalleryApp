@@ -13,12 +13,16 @@
       <div class="center row">
         <%=link_to "Back",root_path,class:"btn btn-primary w-25"%>
         <p class="w-50"></p> 
-        <button class="btn btn-success w-25 addimg">
-          <%= form_with model: @album do |form|%>
-            Add images
-            <%= form.file_field :images, multiple: true,class:"inputimg"%>
-          <% end %>
-        </button>
+        <% if user_signed_in? %>
+          <button class="btn btn-success w-25 addimg">
+            <%= form_with model: @album do |form|%>
+              Add images
+              <%= form.file_field :images, multiple: true,class:"inputimg"%>
+            <% end %>
+          </button>
+        <% else %>
+          <div class="w-25"></div>
+        <% end %>
       </div>
   </div>
   <div class="row justify-content-center g-4 m-1">

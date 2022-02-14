@@ -6,10 +6,10 @@ class Album < ApplicationRecord
   has_many :tags, through: :taggings, dependent: :destroy
 
   validates :title, presence: true, length: { minimum: 3}
-  validates :description, presence: true, length: {minimum: 10,message: "Description greater then 10 charracters"}
+  validates :description, presence: true, length: {minimum: 10,message: " greater then 10 charracters"}
   validates :album_tags, presence: true,length: {minimum: 3}
-  validates :album_pic,attached: true, content_type: [:png, :jpg, :jpeg]
-  validates :images,content_type: [:png, :jpg, :jpeg]
+  validates :album_pic,attached: true,content_type: { in: [:png, :jpg, :jpeg], message: 'is not in jpg, jpeg, png formate' }
+  validates :images,content_type: { in: [:png, :jpg, :jpeg], message: 'is not in jpg, jpeg, png formate' }
 
   def album_tags=(names)
     self.tags= names.split(",").map do |name|

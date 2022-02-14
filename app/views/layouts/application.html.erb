@@ -42,10 +42,16 @@
 
     <div class="container"><br>
       <% if !notice.nil? %>
-        <p class="notice alert alert-success"><%= notice %></p>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <%= notice %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
       <% end %>
       <% if !alert.nil? %>
-        <p class="alert alert-danger"><%= alert %></p>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <%= alert %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
       <% end %><br>
       <div class="mb-5">
         <%= yield %>
@@ -54,7 +60,7 @@
     
     <div class="footer">
       &copy; Copyright-2022 All right reserved<br>
-      GalleryApp made by <span class="text-success">Bikash Choudhury</span>
+      <%# GalleryApp made by <span class="text-success">Bikash Choudhury</span> %>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>

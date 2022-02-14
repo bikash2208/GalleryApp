@@ -8,10 +8,26 @@ class AlbumsController < ApplicationController
 
   def search
     $tags=params[:query]
+    # puts "\n\n\n"+$tags+"\n\n\n"
     if user_signed_in?
-      @albums=Tag.find_by!(name: params[:query]).albums.where(user_id: current_user)
+      begin
+      @albums=Tag.find_by!(name: $tags).albums.where(user_id: current_user)
+      rescue ActiveRecord::RecordNotFound
+        return redirect_to root_path,alert: "'"+$tags+"' tag not found"
+      end
+      if @albums.length == 0
+        return redirect_to root_path, alert: "'"+$tags+"' tag not found"
+      end
     else
-      @albums=Tag.find_by!(name: params[:query]).albums
+      begin
+      @albums=Tag.find_by!(name: $tags).albums
+      rescue ActiveRecord::RecordNotFound
+        # puts "\n\n\n error happend \n\n\n"
+        return redirect_to root_path,alert: "'"+$tags+"' tag not found"
+      end
+      if @albums.length == 0
+        return redirect_to root_path, alert: "'"+$tags+"' tag not found"
+      end
     end
     if $publish == true
       render :home
@@ -23,7 +39,7 @@ class AlbumsController < ApplicationController
   def draft
     $tags=""
     $publish = false
-    $draft="active"
+    $draft="active"  
   end
 
   def home
@@ -84,9 +100,9 @@ class AlbumsController < ApplicationController
   def find_album
     @album=Album.find(params[:id])
     if current_user && @album.user_id != current_user.id
-      redirect_to root_path, notice: "Album does not exist..."
+      redirect_to root_path, alert: "Album does not exist..."
     elsif current_user == nil && @album.publish == false
-      redirect_to root_path, notice: "Album does not exist..."
+      redirect_to root_path, alert: "Album does not exist..."
     end
   end
 
