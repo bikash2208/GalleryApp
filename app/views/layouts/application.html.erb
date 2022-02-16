@@ -15,26 +15,34 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark d-flex justify-content-center">
+    <nav class="navbar navbar-expand-md navbar-dark bg-success">
       <div class="container-fluid">
-        <%=link_to "GalleryApp",albums_home_path,class: "navbar-brand fw-bold fs-2 text-success"%>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#listofnav">
+        <%=link_to "GalleryApp",albums_home_path,class: "navbar-brand fw-bold fs-3",style:"color:light;"%>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-      </div>
-      <div>
-        <div class="collapse navbar-collapse" id="listofnav">
-          <ul class="navbar-nav text-center fs-4">
-            <li class="nav-item active"><%=link_to "Home",albums_home_path,class: "nav-link "+$home.to_s+" m-1 fs-4"%></li>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav text-center me-auto mb-lg-0 fs-5">
+            <li class="nav-item active"><%=link_to "Home",albums_home_path,class: "nav-link "+$home.to_s+" m-1 "%></li>
             <% if user_signed_in? %>
-              <li class="nav-item"><%=link_to "Draft",albums_draft_path,class:"nav-link "+$draft.to_s+" m-1 fs-4"%></li>
-              <li class="nav-item"><%=link_to "AddNewAlbum",new_album_path,class:"nav-link "+$addnew.to_s+" m-1 fs-4"%></li>
-              <li class="nav-item"><%=link_to "SignOut",destroy_user_session_path,class: "nav-link m-1 fs-4",
-              data: {turbo_method: :delete, turbo_confirm: "Are you sure!!!"}%></li>
+              <li class="nav-item"><%=link_to "Draft",albums_draft_path,class:"nav-link "+$draft.to_s+" m-1 "%></li>
+              <li class="nav-item"><%=link_to "AddNewAlbum",new_album_path,class:"nav-link "+$addnew.to_s+" m-1 "%></li>
+            <% end %>
+          </ul>
+          <ul class="navbar-nav text-center fs-5">
+            <% if user_signed_in? %>
+              <li class="nav-item dropdown">
+                <a class="nav-link active dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Welcome <strong><%=current_user.name%></strong></a>
+                <ul class="dropdown-menu text-center" aria-labelledby="navbarScrollingDropdown">
+                  <li class="nav-item text-dark"><%=link_to "Edit Profile",edit_user_registration_path,class: "nav-link m-1 text-dark "%></li>
+                  <li><hr></li>
+                  <li class="nav-item"><%=link_to "SignOut",destroy_user_session_path,class: "nav-link m-1 text-dark",data: {turbo_method: :delete, turbo_confirm: "Are you sure!!!"}%></li>
+                </ul>
+              </li>            
             <% else %>
-              <li class="nav-item"><%=link_to "SignIn",new_user_session_path,class: "nav-link m-1 fs-4"%></li>
-              <li class="nav-item"><%=link_to "SignUp",new_user_registration_path,class: "nav-link m-1 fs-4"%></li>
-            <% end %>            
+              <li class="nav-item"><%=link_to "SignIn",new_user_session_path,class: "nav-link m-1 "%></li>
+              <li class="nav-item"><%=link_to "SignUp",new_user_registration_path,class: "nav-link m-1 "%></li>
+            <% end %>  
           </ul>
         </div>
       </div>
@@ -53,11 +61,12 @@
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       <% end %><br>
+
       <div class="mb-5">
         <%= yield %>
-      </div><br><br><br>
+      </div>
     </div> 
-    
+      
     <div class="footer">
       &copy; Copyright-2022 All right reserved<br>
       <%# GalleryApp made by <span class="text-success">Bikash Choudhury</span> %>

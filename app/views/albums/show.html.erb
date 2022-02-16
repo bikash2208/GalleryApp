@@ -11,12 +11,12 @@
       </div>
     <% end %>
       <div class="center row">
-        <%=link_to "Back",root_path,class:"btn btn-primary w-25"%>
+        <%=link_to "Back",root_path,class:"btn btn-light w-25"%>
         <p class="w-50"></p> 
         <% if user_signed_in? %>
           <button class="btn btn-success w-25 addimg">
             <%= form_with model: @album do |form|%>
-              Add images
+               Add images 
               <%= form.file_field :images, multiple: true,class:"inputimg"%>
             <% end %>
           </button>
@@ -36,7 +36,7 @@
         <% end %>
       </div>
     <% end %>
-  <div>
+  </div>
 </div>
 
 <script>
