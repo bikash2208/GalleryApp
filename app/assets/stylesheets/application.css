@@ -54,7 +54,8 @@ body{
 .index-card {
   margin: 20px 10px;
   border-radius: 4px;
-  width: 380px !important;
+  width: 360px !important;
+  /* width: 380px !important; */
   justify-content: center;
   text-align: center;
   min-height: 400px;
