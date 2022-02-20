@@ -28,6 +28,8 @@ gem "jbuilder"
 
 gem 'devise'
 
+gem 'ransack'
+
 gem 'active_storage_validations'
 
 # Use Redis adapter to run Action Cable in production

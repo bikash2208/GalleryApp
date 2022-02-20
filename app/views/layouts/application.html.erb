@@ -17,13 +17,13 @@
   <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-success">
       <div class="container-fluid">
-        <%=link_to "GalleryApp",albums_home_path,class: "navbar-brand fw-bold fs-3",style:"color:light;"%>
+        <%=link_to "GalleryApp",albums_path,class: "navbar-brand fw-bold fs-3",style:"color:light;"%>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav text-center me-auto mb-lg-0 fs-5">
-            <li class="nav-item active"><%=link_to "Home",albums_home_path,class: "nav-link "+$home.to_s+" m-1 "%></li>
+            <li class="nav-item active"><%=link_to "Home",albums_path,class: "nav-link "+$index.to_s+" m-1 "%></li>
             <% if user_signed_in? %>
               <li class="nav-item"><%=link_to "Draft",albums_draft_path,class:"nav-link "+$draft.to_s+" m-1 "%></li>
               <li class="nav-item"><%=link_to "AddNewAlbum",new_album_path,class:"nav-link "+$addnew.to_s+" m-1 "%></li>

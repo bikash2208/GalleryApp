@@ -1,9 +1,10 @@
+
 <div class="index-search center">
-    <%= form_with url: albums_search_path, method: :get do |form|%>
+    <%= search_form_for @q do |f|%>
       <div class="input-group mb-3">
-        <%= form.text_field :query,value: $tags,placeholder: "Search tags...",class: "form-control", :required => true %>
+        <%= f.search_field :tags_name_cont,placeholder: "Search tags...",class: "form-control" %>
         <div class="input-group-append">
-          <%= form.submit "Search",class:"btn btn-success"%>
+          <%= f.submit "Search",class:"btn btn-success"%>
         </div>
       </div>
     <% end %>

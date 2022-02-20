@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
   get 'albums/draft'
-  get 'albums/home'
-  get '/albums/', to: "albums#home"
-  get 'albums/search'
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -16,5 +13,5 @@ Rails.application.routes.draw do
     end
   end
   
-  root "albums#home"
+  root "albums#index"
 end

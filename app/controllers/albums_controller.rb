@@ -1,51 +1,25 @@
 class AlbumsController < ApplicationController
-  before_action :authenticate_user!, :except => [:home, :show, :search]
+  before_action :authenticate_user!, :except => [:index, :show, :search, :index]
   before_action :find_album, only: [:edit, :update, :show, :destroy]
-  before_action :find_albums
-  before_action :activeconf, only: [:home, :new, :draft]
+  before_action :activeconf, only: [:index, :new, :draft]
   $publish = true
-  $tags=""
 
-  def search
-    $tags=params[:query]
-    # puts "\n\n\n"+$tags+"\n\n\n"
+  def index    
     if user_signed_in?
-      begin
-      @albums=Tag.find_by!(name: $tags).albums.where(user_id: current_user)
-      rescue ActiveRecord::RecordNotFound
-        return redirect_to root_path,alert: "'"+$tags+"' tag not found"
-      end
-      if @albums.length == 0
-        return redirect_to root_path, alert: "'"+$tags+"' tag not found"
-      end
+      @q = current_user.albums.ransack(params[:q]) 
     else
-      begin
-      @albums=Tag.find_by!(name: $tags).albums
-      rescue ActiveRecord::RecordNotFound
-        # puts "\n\n\n error happend \n\n\n"
-        return redirect_to root_path,alert: "'"+$tags+"' tag not found"
-      end
-      if @albums.length == 0
-        return redirect_to root_path, alert: "'"+$tags+"' tag not found"
-      end
+      @q = Album.ransack(params[:q])             
     end
-    if $publish == true
-      render :home
-    else
-      render :draft
-    end
+    @albums = @q.result(distinct: true).includes(:tags)
+    
+    $publish = true
+    $index="active"
   end
 
   def draft
-    $tags=""
+    @albums=current_user.albums    
     $publish = false
     $draft="active"  
-  end
-
-  def home
-    $tags=""
-    $publish = true
-    $home="active"
   end
 
   def new
@@ -79,7 +53,6 @@ class AlbumsController < ApplicationController
   end
 
   def destroy
-    # Tagging.destroy_by(album_id: params[:id])
     if @album.destroy
       redirect_to root_path, status: :see_other
     end    
@@ -106,18 +79,10 @@ class AlbumsController < ApplicationController
     end
   end
 
-  def find_albums
-    if user_signed_in?
-      @albums=Album.where(user_id: current_user)
-    else
-      @albums=Album.all
-    end
-  end
-
   def activeconf
     $addnew=""
     $draft=""
-    $home=""
+    $index=""
   end
 
 end
