@@ -3,22 +3,6 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  # Don't care if the mailer can't send.
-  # config.action_mailer.raise_delivery_errors = true
-
-  config.action_mailer.default_url_options = {host: 'galleryapp-bikash.herokuapp.com'}
-  # config.action_mailer.perform_deliveries = true
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
-    port:                 587,
-    # domain:               'galleryapp-bikash.herokuapp.com',
-    user_name:            Rails.application.credentials.dig(:gmail_smtp, :email),
-    password:             Rails.application.credentials.dig(:gmail_smtp, :password),
-    authentication:       'plain',
-  }
-
-
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -81,6 +65,21 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "gallery_app_production"
 
   config.action_mailer.perform_caching = false
+  # Don't care if the mailer can't send.
+  # config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = { host: 'https://galleryapp-bikash.herokuapp.com' }
+  # config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    user_name:            Rails.application.credentials.dig(:gmail_smtp, :email),
+    password:             Rails.application.credentials.dig(:gmail_smtp, :password),
+    authentication:       'plain',
+    enable_starttls_auto: true,
+    open_timeout:         5,
+    read_timeout:         5 
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
