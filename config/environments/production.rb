@@ -65,20 +65,20 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "gallery_app_production"
 
   config.action_mailer.perform_caching = false
+  
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { host: 'https://galleryapp-bikash.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { host: 'https://galleryapp-bikash.herokuapp.com' }
   config.action_mailer.smtp_settings = {
     address:              'smtp.gmail.com',
     port:                 587,
+    domain:               'gmail.com',
     user_name:            Rails.application.credentials.dig(:gmail_smtp, :email),
     password:             Rails.application.credentials.dig(:gmail_smtp, :password),
     authentication:       'plain',
     enable_starttls_auto: true,
-    open_timeout:         5,
-    read_timeout:         5 
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
